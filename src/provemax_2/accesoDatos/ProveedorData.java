@@ -212,8 +212,31 @@ public class ProveedorData {
             JOptionPane.showMessageDialog(null ,"Error al conectar con la tabla proveedor");
         }
         return proveedor;
-            
-      
+           
         
     }
+      public Proveedor buscarProveedorPorCUIT(String cuit) {
+        try {
+       
+            String sql = "SELECT * FROM proveedores WHERE cuit = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setFloat(1, Float.parseFloat(cuit)); // Convertir el CUIT a float para la consulta
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(rs.getInt("id"));
+                proveedor.setRazonSocial(rs.getString("nombre"));
+                proveedor.setCuit(rs.getFloat("cuit"));// Obtener directamente como String
+                proveedor.setDomicilio(rs.getString("domicilio"));
+                proveedor.setTelefono(rs.getString("telefono"));
+                proveedor.setEstado(true);
+
+                return proveedor;
+            }
+        } catch (SQLException | NumberFormatException ex) {
+            ex.printStackTrace(); // Manejo de excepciones (puedes mostrar un mensaje de error, registrar el error, etc.)
+        }
+        return null;
+}
 }

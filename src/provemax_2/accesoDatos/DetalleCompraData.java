@@ -32,52 +32,53 @@ public class DetalleCompraData {
         con = Conexion.getConexion();
               
     }
-    
-   public ArrayList<DetalleCompra> listarDetallePorCompra(){  // no corre
-       ArrayList<DetalleCompra> listaDetalles =new ArrayList<>();
-        String sql= " SELECT * FROM detalleCompra ";
-    try {
-         PreparedStatement ps= con.prepareStatement(sql);
-         ResultSet rs=ps.executeQuery();
+      
+     public ArrayList<DetalleCompra> buscarDetallePorCompra(Compra compra){
+        String sql= " SELECT idDetalle, cantidad, precioCosto , idProducto, idCompra * FROM detalleCompra WHERE idCompra  = 0";
+        ArrayList<DetalleCompra> detalles= new ArrayList<>();
+       try{
+          PreparedStatement ps= con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+          ps.setInt(1,compra.getIdCompra());
+          
+          ResultSet rs=ps.executeQuery();
+          DetalleCompra detaCompra;
+          Producto produc;
          while(rs.next()){
-             DetalleCompra deta= new DetalleCompra();
-
-//             deta.setIdDetalle(rs.getInt("idDetalleCompra"));
-             deta.setCantidad(rs.getInt("cantidad"));
-             deta.setPrecioCosto(rs.getDouble("precioCosto"));
-             Compra compra = comData.buscarCompra(rs.getInt("idCompra"));
-             deta.setCompra(compra);
-            Producto producto = prodData.buscarProductoPorId(rs.getInt("idProducto"));
-             deta.setProducto(producto);
-             listaDetalles.add(deta);
-         }
-         ps.close();
-     } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null,"Error al conectar con tabla de detalle compra "+ ex.getMessage());
-  }
-     return listaDetalles ;
+           produc = prodData.buscarProductoPorId(rs.getInt("idProducto")); 
+           detaCompra = new DetalleCompra(rs.getInt("idDetalleCompra"),
+                                         rs.getInt("cantidad"),
+                                         rs.getDouble("precioCosto"),
+                                        compra,produc);
+           detalles.add(detaCompra);
+           }
+           ps.close();
+         
+       }  catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null,"error al acceder a la tabla" + ex.getMessage());
     }
-     
    
-    public void guardarDetalleCompra(DetalleCompra detCom) {
-        String sql = "INSERT INTO detalleCompra (cantidad, precioCosto, idCompra, idProducto) VALUES (?, ?, ?, ?)";
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, detCom.getCantidad()); // Establecer la cantidad en el primer parámetro
-            ps.setDouble(2, detCom.getPrecioCosto()); // Establecer el precioCosto en el segundo parámetro
-            ps.setInt(3, detCom.getCompra().getIdCompra()); // Establecer el idCompra en el tercer parámetro
-            ps.setInt(4, detCom.getProducto().getIdProducto()); // Establecer el idProducto en el cuarto parámetro
+    return detalles;
+}
+ 
+    public void guardarDetalleCompra(DetalleCompra detCom){
+        String sql = " INSERT INTO detalleCompra (cantidad,precioCosto, idCompra,idProducto)"
+                + " VALUES (?,?,?,?) ";
+         try {
+             PreparedStatement ps= con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1,detCom.getCompra().getIdCompra());
+            ps.setInt(2, detCom.getProducto().getIdProducto());
+             ps.setInt(3,detCom.getCantidad());
+            ps.setDouble(4,detCom.getPrecioCosto());
             ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                 int generatedId = rs.getInt(1);
-                detCom.setIdDetalle(generatedId);
-                JOptionPane.showMessageDialog(null, "Compra  agregada exitosamente con ID : " + generatedId);
-            }
+             ResultSet rs = ps.getGeneratedKeys();
+             if (rs.next()) {
+                 detCom.setIdDetalle(rs.getInt(1));
+                 JOptionPane.showMessageDialog(null, "Detalle de compra Guardado CORRECTAMENTE");
+             }
             ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectar con la tabla de detalleCompra: " + ex.getMessage());
-        }
+         } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null,"Error al conectar con tabla de detalleCompra" + ex.getMessage());
+         }
     }
     
       public void modificarPrecioCosto(int idCompra, int idProducto, double precioCosto){ // funciona
@@ -97,8 +98,8 @@ public class DetalleCompraData {
              JOptionPane.showMessageDialog(null,"Error al ingresar a la tabla detalleCompra " + ex.getMessage());
          }
       }
-      
-      public void eliminar(int idDetalle){
+    
+    public void eliminar(int idDetalle){
     String sql = "DELETE FROM detalleCompra WHERE idDetalle = ?";
 
     try {
@@ -116,10 +117,6 @@ public class DetalleCompraData {
     }
   
     }
-      
-      
-      
 }
-      
       
      

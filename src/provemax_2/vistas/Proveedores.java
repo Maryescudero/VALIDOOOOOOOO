@@ -315,14 +315,21 @@ public class Proveedores extends javax.swing.JInternalFrame {
     
     
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-         
-               try {
-            String razonSocial = jtfRazonSocial.getText().trim();
-            provActual = provData.buscarProveedorPorNombre(razonSocial);
+         try {
+        String razonSocial = jtfRazonSocial.getText().trim(); // Obtener el texto del campo de razón social
+        String cuit = jtfCuit.getText().trim(); // Obtener el CUIT ingresado
+
+        // Intentar buscar por nombre
+        provActual = provData.buscarProveedorPorNombre(razonSocial);
+        if (provActual != null) {
+            llenarCamposProveedor(provActual);
+        } else {
+            // Si no se encuentra por nombre, intentar buscar por CUIT
+            provActual = provData.buscarProveedorPorCUIT(cuit);
             if (provActual != null) {
                 llenarCamposProveedor(provActual);
             } else {
-                // Si no se encontró por nombre, intentar buscar por ID
+                // Si no se encuentra por CUIT, intentar buscar por ID (si se ingresó un número)
                 try {
                     int idProveedor = Integer.parseInt(jtfIdProveedor.getText().trim());
                     provActual = provData.buscarProveedorPorId(idProveedor);
@@ -332,12 +339,16 @@ public class Proveedores extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "Proveedor no encontrado por ID");
                     }
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NUMERO EN ESE CAMPO");
+                    // Si se ingresó texto en el campo de ID o si no se encontró por ninguno de los criterios
+                    JOptionPane.showMessageDialog(this, "No se encontró el proveedor por nombre, CUIT o ID");
                 }
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "HA OCURRIDO UN ERROR");
         }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "HA OCURRIDO UN ERROR");
+    }
+        
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed

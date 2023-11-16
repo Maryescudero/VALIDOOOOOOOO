@@ -118,28 +118,38 @@ public class CompraData {
         return compras;
     }
       
-       public ArrayList<Compra> listarComprasInactivas(){ // funciona
-         String sql = "SELECT idCompra, idProveedor,fecha, estado FROM compra WHERE estado = 0";
-        ArrayList<Compra> compras = new ArrayList<>();
-        Compra compra = null;
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                compra = new Compra();
-                compra.setIdCompra(rs.getInt("idCompra"));
-                 Proveedor prov= provData.buscarProveedorPorId(rs.getInt("idProveedor"));
+
+      public ArrayList<Compra> listarComprasInactivas() {
+    String sql = "SELECT idCompra, idProveedor, fecha FROM compra WHERE estado = 0";
+    ArrayList<Compra> compras = new ArrayList<>();
+    
+    try (PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            Compra compra = new Compra();
+            compra.setIdCompra(rs.getInt("idCompra"));
+            
+            // Obtener el proveedor de la compra
+            int idProveedor = rs.getInt("idProveedor");
+            Proveedor prov = provData.buscarProveedorPorId(idProveedor);
+            
+            if (prov != null) {
                 compra.setProveedor(prov);
-                compra.setFecha(rs.getDate("fecha").toLocalDate());
-                compra.setEstado(true);
-                compras.add(compra);
+            } else {
+                // Manejar el caso en que no se encuentre el proveedor
+                // Puedes setear un proveedor "predeterminado" o manejarlo de otra manera
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla" + ex.getMessage());
+
+            compra.setFecha(rs.getDate("fecha").toLocalDate());
+            compra.setEstado(false); // Ya que se está buscando compras inactivas
+
+            compras.add(compra);
         }
-        return compras;
-       
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla: " + ex.getMessage());
     }
+    return compras;
+}
 
        
         public void borrarCompra(int idProveedor){  // funciona

@@ -108,6 +108,11 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
 
         jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-cerrar-ventana-20.png"))); // NOI18N
         jbSalir.setText("EXIT");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Algerian", 3, 24)); // NOI18N
         jLabel1.setText("LISTADO  DE COMPRAS");
@@ -356,6 +361,11 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
             actualizarTabla(false);
         }
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose();
+         JOptionPane.showMessageDialog(this, "DESEA REGRESAR A LA PAGINA PRINCIPAL");
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

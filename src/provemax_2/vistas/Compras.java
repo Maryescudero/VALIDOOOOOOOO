@@ -26,8 +26,8 @@ private Compra compActual = null;
         initComponents();
         this.setTitle("Compras");
          provData = new ProveedorData();
-        listProv = provData.listarProveedores(); // Obtener la lista de proveedores desde la fuente de datos
-        cargarProveedor(); // Llamar al método para cargar los proveedores en el JComboBox
+        listProv = provData.listarProveedores(); 
+        cargarProveedor(); 
     }
     
     

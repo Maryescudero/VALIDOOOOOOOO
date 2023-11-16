@@ -117,6 +117,36 @@ public class DetalleCompraData {
     }
   
     }
+    
+    public DetalleCompra buscarDetalleCompraPorId(int idDetalleCompra) {
+    String sql = "SELECT * FROM detalleCompra WHERE idDetalle = ?";
+    DetalleCompra detalleCompra = null;
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idDetalleCompra);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Obtener los datos del detalle de compra y crear un objeto DetalleCompra
+            int cantidad = rs.getInt("cantidad");
+            double precioCosto = rs.getDouble("precioCosto");
+            // Obtener la compra y el producto asociados al detalle de compra
+            int idCompra = rs.getInt("idCompra");
+            Compra compra = comData.buscarCompra(idCompra); // Suponiendo que compData es una instancia de CompraData
+            int idProducto = rs.getInt("idProducto");
+            Producto producto = prodData.buscarProductoPorId(idProducto); // Suponiendo que productoData es una instancia de ProductoData
+
+            detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
+            detalleCompra.setIdDetalle(idDetalleCompra);
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla: " + ex.getMessage());
+    }
+
+    return detalleCompra;
+}
+    
 }
       
      

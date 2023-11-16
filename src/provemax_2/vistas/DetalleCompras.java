@@ -312,7 +312,7 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
         DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compraSeleccionada, productoSeleccionado);
         DetalleCompraData detalleCompraData = new DetalleCompraData();
         detalleCompraData.guardarDetalleCompra(detalleCompra);
-
+        agregarDetalleCompraATabla(detalleCompra); // agrego detalle a mi tabla
         JOptionPane.showMessageDialog(this, "Detalle de compra guardado correctamente");
     } catch (NumberFormatException ex) {
         JOptionPane.showMessageDialog(this, "Debe ingresar valores válidos en los campos de cantidad y precio de costo.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -324,6 +324,18 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbAgregarActionPerformed
 
+    private void agregarDetalleCompraATabla(DetalleCompra detalleCompra) {
+         Object[] fila = new Object[5]; // Número de columnas de tu tabla
+    fila[0] = detalleCompra.getIdDetalle(); // Suponiendo que el primer elemento es el ID del detalle
+    fila[1] = detalleCompra.getCantidad();
+    fila[2] = detalleCompra.getPrecioCosto();
+    fila[3] = detalleCompra.getCompra().getIdCompra(); // Obtén el ID de la compra
+    fila[4] = detalleCompra.getProducto().getIdProducto(); // Obtén el ID del producto
+    
+    // Agregar la fila a la tabla
+    modelo.addRow(fila);
+    }
+    
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
       if (detaActual != null) {  // VER PORQUE NO ME ELIMINA
         detaData.eliminar(detaActual.getIdDetalle());
@@ -369,7 +381,8 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
                     break;
                 }
             }
-
+            
+             agregarDetalleCompraATabla(detalleEncontrado);
             JOptionPane.showMessageDialog(this, "Detalle de Compra encontrado");
         } else {
             JOptionPane.showMessageDialog(this, "Detalle de Compra no encontrado", "Error", JOptionPane.ERROR_MESSAGE);

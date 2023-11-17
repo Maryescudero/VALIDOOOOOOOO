@@ -333,7 +333,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
             modelo.addRow(new Object[]{
                 compra.getIdCompra(),
                 compra.getProveedor(),
-                compra.getIdCompra(),
+                compra.getFecha(),
                 
             });
         }

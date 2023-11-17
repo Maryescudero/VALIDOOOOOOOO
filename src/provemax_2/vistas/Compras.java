@@ -293,7 +293,7 @@ private Compra compActual = null;
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
      if (compActual != null) { // funciona
-        compData.borrarCompra(compActual.getIdCompra());
+        compData.borrarCompraPorCompra(compActual.getIdCompra());
         compActual = null;
         limpiarCampos();  
 

@@ -42,14 +42,14 @@ public class ProductoData {
             ps.executeUpdate();
             ResultSet rs= ps.getGeneratedKeys();
             if (rs.next()) {
-                producto.setIdProducto(rs.getInt(1));
+                int generatedId = rs.getInt(1);
+                producto.setIdProducto(generatedId);
                 if (producto.getStock() < 3) {
-                JOptionPane.showMessageDialog(null, "El producto tiene un stock menor a 3", "Alerta de Stock", JOptionPane.WARNING_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Producto agregado exitosamente");
-            }
-                
-             JOptionPane.showMessageDialog(null,"Producto agregado exitosamente");
+                    JOptionPane.showMessageDialog(null, "El producto tiene un stock menor a 3", "Alerta de Stock", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Producto agregado exitosamente con ID : " + generatedId);
+                }
+
                 
             }
             ps.close();
@@ -129,8 +129,7 @@ public class ProductoData {
             ps.setDouble(3, producto.getPrecioActual());
             ps.setInt(4, producto.getStock());
             ps.setInt(5, producto.getStockMinimo());
-           ps.setBoolean(6, true);
-           ps.setInt(7,producto.getIdProducto());
+           ps.setInt(6,producto.getIdProducto());
            int exito= ps.executeUpdate();
             
             if(exito==1){
@@ -219,22 +218,21 @@ public class ProductoData {
         return productos; 
     }
         
-        
-         public void eliminarProductoId(int id){ // elimino producto sentencia update
-       String sql= " UPDATE producto SET estado = 0 where idProducto=? ";
+           public void eliminarProductoId(int id) { // elimino producto sentencia update
+        String sql = " UPDATE producto SET estado = 0 where idProducto=? ";
         try {
-            PreparedStatement ps= con.prepareStatement(sql);
-            
-            ps.setInt(1,id);
-            int modificado=ps.executeUpdate();
-           
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, id);
+            int modificado = ps.executeUpdate();
+
             if (modificado == 1) {
-                JOptionPane.showMessageDialog(null,"producto Sin Stock");
+                JOptionPane.showMessageDialog(null, "Eliminado");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla producto" + ex.getMessage());
         }
-   }
+    }
 }
 
 

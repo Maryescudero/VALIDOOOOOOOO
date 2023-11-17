@@ -70,6 +70,7 @@ private Compra compActual = null;
         jbEliminar = new javax.swing.JButton();
         jbExit = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jbActualizar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -167,24 +168,34 @@ private Compra compActual = null;
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-pagado.gif"))); // NOI18N
 
+        jbActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-guardar-16.png"))); // NOI18N
+        jbActualizar.setText("ACTUALIZAR");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(129, 129, 129)
+                .addGap(70, 70, 70)
                 .addComponent(jbAgregar)
-                .addGap(135, 135, 135)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbActualizar)
+                .addGap(88, 88, 88)
                 .addComponent(jbEliminar)
-                .addGap(135, 135, 135)
+                .addGap(99, 99, 99)
                 .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(147, 147, 147))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(113, 113, 113))
         );
@@ -199,7 +210,8 @@ private Compra compActual = null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregar)
                     .addComponent(jbEliminar)
-                    .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(153, 153, 153)
@@ -294,6 +306,10 @@ private Compra compActual = null;
     }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -305,6 +321,7 @@ private Compra compActual = null;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;

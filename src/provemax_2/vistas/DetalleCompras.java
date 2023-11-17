@@ -27,7 +27,6 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
     private CompraData compData = new CompraData();
     private Compra compActual = null;
    private DefaultTableModel modelo;
-    private DetalleCompra detaActual = null;
     private DetalleCompraData detaData;
     
     public DetalleCompras() {
@@ -35,6 +34,7 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
         this.setTitle("DETALLE COMPRA ");
          prodData = new ProductoData();
         listProd = prodData.listarProductos(); 
+        detaData = new DetalleCompraData();
         cargarProductos(); 
         listComp = compData.listarComprasActivas();
         cargarCompras();
@@ -211,6 +211,11 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
 
         jbExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-cerrar-ventana-20.png"))); // NOI18N
         jbExit.setText("SALIR");
+        jbExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExitActionPerformed(evt);
+            }
+        });
 
         jtDetalleCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,22 +250,24 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
                         .addGap(167, 167, 167)
                         .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53))
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
                                 .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(70, 70, 70)))
+                                .addGap(17, 17, 17)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
                                 .addComponent(jbActualizar)
-                                .addGap(96, 96, 96)
+                                .addGap(92, 92, 92)
                                 .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,15 +310,15 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
                  
-     try {
+     try {  // manejo errores
         
-        int cantidad = (int) jsCantidad.getValue();
+        int cantidad = (int) jsCantidad.getValue(); // Obtengo mis valores de ingreso
         double precioCosto = Double.parseDouble(jtfPrecio.getText());
         Compra compraSeleccionada = (Compra) jcbCompra.getSelectedItem();
         Producto productoSeleccionado = (Producto) jcbProducto.getSelectedItem();
         DetalleCompra detalleCompra = new DetalleCompra(cantidad, precioCosto, compraSeleccionada, productoSeleccionado);
-        DetalleCompraData detalleCompraData = new DetalleCompraData();
-        detalleCompraData.guardarDetalleCompra(detalleCompra);
+        DetalleCompraData detalleCompraData = new DetalleCompraData(); // creo objeto detalle
+        detalleCompraData.guardarDetalleCompra(detalleCompra); // instancio mi objeto para guardarlo
         agregarDetalleCompraATabla(detalleCompra); // agrego detalle a mi tabla
         JOptionPane.showMessageDialog(this, "Detalle de compra guardado correctamente");
     } catch (NumberFormatException ex) {
@@ -326,40 +333,45 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
 
     private void agregarDetalleCompraATabla(DetalleCompra detalleCompra) {
          Object[] fila = new Object[5]; // Número de columnas de tu tabla
-    fila[0] = detalleCompra.getIdDetalle(); // Suponiendo que el primer elemento es el ID del detalle
+    fila[0] = detalleCompra.getIdDetalle(); // toma mi objerto y lo agrega a las filas
     fila[1] = detalleCompra.getCantidad();
     fila[2] = detalleCompra.getPrecioCosto();
-    fila[3] = detalleCompra.getCompra().getIdCompra(); // Obtén el ID de la compra
-    fila[4] = detalleCompra.getProducto().getIdProducto(); // Obtén el ID del producto
+    fila[3] = detalleCompra.getCompra().getIdCompra(); 
+    fila[4] = detalleCompra.getProducto().getIdProducto(); 
     
     // Agregar la fila a la tabla
     modelo.addRow(fila);
     }
     
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-      if (detaActual != null) {  // VER PORQUE NO ME ELIMINA
-        detaData.eliminar(detaActual.getIdDetalle());
-        detaActual = null; 
-        limpiarCampos(); 
+       
+    int filaSeleccionada = jtDetalleCompra.getSelectedRow(); // Obtengo la fila seleccionada
 
-   
+    if (filaSeleccionada != -1) {
+        int idDetalle = (int) modelo.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna 0 contiene el ID del detalle
 
-        JOptionPane.showMessageDialog(this, "El detalle de compra se eliminó correctamente.");
+        modelo.removeRow(filaSeleccionada); // Eliminar la fila de la tabla 
+
+        DetalleCompraData detalleData = new DetalleCompraData();
+        detaData.eliminar(idDetalle); // Llamar al método para eliminar el detalle en la base de datos
+
+        JOptionPane.showMessageDialog(this, "Detalle de compra eliminado correctamente.", "Eliminación exitosa", JOptionPane.INFORMATION_MESSAGE);
     } else {
-        JOptionPane.showMessageDialog(this, "NO SE SELECCIONÓ NINGÚN DETALLE DE COMPRA");
+        JOptionPane.showMessageDialog(this, "Selecciona un detalle de compra para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-      
+
+
       
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
          try {
-        int idDetalleCompra = Integer.parseInt(jtfIdDetalle.getText());
-        DetalleCompraData detalleCompraData = new DetalleCompraData();
+        int idDetalleCompra = Integer.parseInt(jtfIdDetalle.getText()); // obtengo mi id
+        DetalleCompraData detalleCompraData = new DetalleCompraData(); // utilizo mi objeto detalle compra para buscar el detalle d ela compra por el id
         DetalleCompra detalleEncontrado = detalleCompraData.buscarDetalleCompraPorId(idDetalleCompra);
 
         if (detalleEncontrado != null) {
-            // Mostrar los detalles del detalle de compra encontrado en los componentes de la interfaz gráfica
+            // Mostrar los detalles del detalle de compra encontrados
             jtfIdDetalle.setText(String.valueOf(detalleEncontrado.getIdDetalle()));
             jtfPrecio.setText( String.valueOf(detalleEncontrado.getPrecioCosto()));
             jcbCompra.setSelectedIndex(WIDTH);
@@ -382,7 +394,7 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
                 }
             }
             
-             agregarDetalleCompraATabla(detalleEncontrado);
+             agregarDetalleCompraATabla(detalleEncontrado); // llamo a la funcion agregar para que me agregue el detale
             JOptionPane.showMessageDialog(this, "Detalle de Compra encontrado");
         } else {
             JOptionPane.showMessageDialog(this, "Detalle de Compra no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
@@ -395,6 +407,11 @@ public class DetalleCompras extends javax.swing.JInternalFrame {
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
         limpiarCampos();
     }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
+        dispose();
+        JOptionPane.showMessageDialog(this,"Desea regresar a la pagina principal");
+    }//GEN-LAST:event_jbExitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

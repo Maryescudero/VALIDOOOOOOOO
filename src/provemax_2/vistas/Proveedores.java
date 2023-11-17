@@ -358,7 +358,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
             provActual=null;
             limpiarCampos();  
         }else{
-            JOptionPane.showInternalMessageDialog(this, "NO SE SELECCIONO NINGUN ALUMNO");
+            JOptionPane.showInternalMessageDialog(this, "NO SE SELECCIONO NINGUN PROVEEDOR");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 

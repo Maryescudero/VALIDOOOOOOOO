@@ -42,9 +42,9 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                   <Component id="jbActualizar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
                   <Component id="jbEliminar" min="-2" pref="123" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jbSalir" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
               </Group>

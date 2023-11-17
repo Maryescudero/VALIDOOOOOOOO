@@ -99,25 +99,28 @@ public class DetalleCompraData {
          }
       }
     
-    public void eliminar(int idDetalle){
-    String sql = "DELETE FROM detalleCompra WHERE idDetalle = ?";
+    public void eliminar(int idDetalle) {
+       String sql =  " DELETE FROM detalleCompra WHERE idDetalle = ? ";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, idDetalle);
 
-    try {
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, idDetalle);
-        int eliminado = ps.executeUpdate();
-        if (eliminado == 1) {
-            JOptionPane.showMessageDialog(null, "Detalle Compra eliminado");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el detalle de compra para eliminar");
+            int filasAfectadas = ps.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Detalle de compra eliminado exitosamente");
+            } else {
+                System.out.println("No se encontró el detalle de compra con ID: " + idDetalle);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            System.out.println("Error al eliminar el detalle de compra: " + ex.getMessage());
+            ex.printStackTrace();
         }
-        ps.close();
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a tabla detalle Compra" + ex.getMessage());
+
     }
-  
-    }
-    
+
     public DetalleCompra buscarDetalleCompraPorId(int idDetalleCompra) {
     String sql = "SELECT * FROM detalleCompra WHERE idDetalle = ?";
     DetalleCompra detalleCompra = null;

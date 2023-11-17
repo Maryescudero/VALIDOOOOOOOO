@@ -64,12 +64,12 @@ public class DetalleCompraData {
         String sql = " INSERT INTO detalleCompra (cantidad,precioCosto, idCompra,idProducto)"
                 + " VALUES (?,?,?,?) ";
          try {
-             PreparedStatement ps= con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1,detCom.getCompra().getIdCompra());
-            ps.setInt(2, detCom.getProducto().getIdProducto());
-             ps.setInt(3,detCom.getCantidad());
-            ps.setDouble(4,detCom.getPrecioCosto());
-            ps.executeUpdate();
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+             ps.setInt(1, detCom.getCantidad());
+             ps.setDouble(2, detCom.getPrecioCosto());
+             ps.setInt(3, detCom.getCompra().getIdCompra());
+             ps.setInt(4, detCom.getProducto().getIdProducto());
+             ps.executeUpdate();
              ResultSet rs = ps.getGeneratedKeys();
              if (rs.next()) {
                  detCom.setIdDetalle(rs.getInt(1));

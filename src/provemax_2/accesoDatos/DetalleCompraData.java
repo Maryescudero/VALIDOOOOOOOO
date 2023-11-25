@@ -50,7 +50,10 @@ public class DetalleCompraData {
                                          rs.getDouble("precioCosto"),
                                         compra,produc);
            detalles.add(detaCompra);
+           
+           
            }
+         
            ps.close();
          
        }  catch (SQLException ex) {

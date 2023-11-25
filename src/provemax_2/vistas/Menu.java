@@ -51,6 +51,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jrmCompra = new javax.swing.JRadioButtonMenuItem();
         jrmListadoCompra = new javax.swing.JRadioButtonMenuItem();
+        jrmNuevasCompras = new javax.swing.JRadioButtonMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jrmDetalle = new javax.swing.JRadioButtonMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -149,6 +150,15 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jrmListadoCompra);
+
+        jrmNuevasCompras.setSelected(true);
+        jrmNuevasCompras.setText("Nuevas Compras");
+        jrmNuevasCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrmNuevasComprasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jrmNuevasCompras);
 
         jMenuBar1.add(jMenu3);
 
@@ -268,6 +278,15 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane1.moveToFront(listprod);
     }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
+    private void jrmNuevasComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrmNuevasComprasActionPerformed
+            jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        NuevaCompra nuevaCompra = new NuevaCompra();
+        nuevaCompra.setVisible(true);
+        jDesktopPane1.add(nuevaCompra);
+        jDesktopPane1.moveToFront(nuevaCompra);
+    }//GEN-LAST:event_jrmNuevasComprasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -319,6 +338,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jrmExit;
     private javax.swing.JRadioButtonMenuItem jrmListadoCompra;
     private javax.swing.JRadioButtonMenuItem jrmListadoProveedor;
+    private javax.swing.JRadioButtonMenuItem jrmNuevasCompras;
     private javax.swing.JRadioButtonMenuItem jrmProveedor;
     // End of variables declaration//GEN-END:variables
 }

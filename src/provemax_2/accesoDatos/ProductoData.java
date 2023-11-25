@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+
 import provemax_2.entidades.Producto;
 
 /**
@@ -232,6 +233,57 @@ public class ProductoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla producto" + ex.getMessage());
         }
+    }
+           
+           
+      public void restarStockDespuesCompra(Producto producto, int cantidadComprada) {
+    try {
+        int stockActual = producto.getStock();
+        int nuevoStock = stockActual - cantidadComprada;
+        producto.setStock(nuevoStock);
+
+        // Actualizar el stock en la base de datos
+        String sql = "UPDATE producto SET stock = ? WHERE idProducto = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, nuevoStock);
+        ps.setInt(2, producto.getIdProducto());
+
+        int filasActualizadas = ps.executeUpdate();
+        if (filasActualizadas > 0) {
+            System.out.println("Stock actualizado para el producto con ID: " + producto.getIdProducto());
+        } else {
+            System.out.println("No se pudo actualizar el stock para el producto con ID: " + producto.getIdProducto());
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al actualizar el stock después de la compra: " + ex.getMessage());
+    }
+}     
+    public boolean verificarStockSuficiente(Producto producto, int cantidadDeseada) {
+        boolean suficienteStock = false;
+
+        try {
+            String sql = "SELECT stock FROM producto WHERE idProducto = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, producto.getIdProducto());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int stockActual = rs.getInt("stock");
+                if (stockActual >= cantidadDeseada) {
+                    suficienteStock = true;
+                }
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al verificar el stock: " + ex.getMessage());
+        }
+
+        return suficienteStock;
     }
 }
 

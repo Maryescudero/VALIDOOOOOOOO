@@ -33,6 +33,7 @@ private Compra compActual = null;
     
      private void limpiarCampos() {
         jtfIdCompra.setText("");
+        jcbProveedor.setSelectedIndex(-1);
         jDateChooser1.setDate(new Date());
         jrbEstado.setSelected(true);
        

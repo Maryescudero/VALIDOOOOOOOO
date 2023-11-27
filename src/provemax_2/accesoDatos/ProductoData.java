@@ -236,30 +236,30 @@ public class ProductoData {
     }
            
            
-      public void restarStockDespuesCompra(Producto producto, int cantidadComprada) {
-    try {
-        int stockActual = producto.getStock();
-        int nuevoStock = stockActual - cantidadComprada;
-        producto.setStock(nuevoStock);
+    public void restarStockDespuesCompra(Producto producto, int cantidadComprada) {
+        try {
+            int stockActual = producto.getStock();
+            int nuevoStock = stockActual + cantidadComprada;
+            producto.setStock(nuevoStock);
 
-        // Actualizar el stock en la base de datos
-        String sql = "UPDATE producto SET stock = ? WHERE idProducto = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, nuevoStock);
-        ps.setInt(2, producto.getIdProducto());
+            // Actualizar el stock en la base de datos
+            String sql = "UPDATE producto SET stock = ? WHERE idProducto = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, nuevoStock);
+            ps.setInt(2, producto.getIdProducto());
 
-        int filasActualizadas = ps.executeUpdate();
-        if (filasActualizadas > 0) {
-            System.out.println("Stock actualizado para el producto con ID: " + producto.getIdProducto());
-        } else {
-            System.out.println("No se pudo actualizar el stock para el producto con ID: " + producto.getIdProducto());
+            int filasActualizadas = ps.executeUpdate();
+            if (filasActualizadas > 0) {
+                System.out.println("Stock actualizado para el producto con ID: " + producto.getIdProducto());
+            } else {
+                System.out.println("No se pudo actualizar el stock para el producto con ID: " + producto.getIdProducto());
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al actualizar el stock después de la compra: " + ex.getMessage());
         }
-
-        ps.close();
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error al actualizar el stock después de la compra: " + ex.getMessage());
-    }
 }     
     public boolean verificarStockSuficiente(Producto producto, int cantidadDeseada) {
         boolean suficienteStock = false;
@@ -279,7 +279,6 @@ public class ProductoData {
 
             ps.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al verificar el stock: " + ex.getMessage());
         }
 

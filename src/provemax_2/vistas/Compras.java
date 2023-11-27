@@ -27,23 +27,20 @@ private Compra compActual = null;
         this.setTitle("Compras");
          provData = new ProveedorData();
         listProv = provData.listarProveedores(); 
-        cargarProveedor(); 
+         
     }
     
     
      private void limpiarCampos() {
         jtfIdCompra.setText("");
-        jcbProveedor.setSelectedIndex(-1);
+        jtfCuit.setText("");
+        jtfNombre.setText("");
         jDateChooser1.setDate(new Date());
         jrbEstado.setSelected(true);
        
     }
      
-     private void cargarProveedor() {
-        for (Proveedor item : listProv) {
-            jcbProveedor.addItem(item);
-        }
-    }
+    
      
      
     /**
@@ -64,9 +61,11 @@ private Compra compActual = null;
         jLabel5 = new javax.swing.JLabel();
         jrbEstado = new javax.swing.JRadioButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jcbProveedor = new javax.swing.JComboBox<>();
         jtfIdCompra = new javax.swing.JTextField();
         jbBuscar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jtfCuit = new javax.swing.JTextField();
+        jtfNombre = new javax.swing.JTextField();
         jbAgregar = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbExit = new javax.swing.JButton();
@@ -95,30 +94,42 @@ private Compra compActual = null;
             }
         });
 
+        jLabel7.setText("CUIT : ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addGap(28, 28, 28))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jtfNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jtfIdCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jrbEstado)
-                            .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(83, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jtfIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))))
+                            .addComponent(jtfCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,14 +139,18 @@ private Compra compActual = null;
                     .addComponent(jLabel2)
                     .addComponent(jtfIdCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscar))
-                .addGap(49, 49, 49)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(48, 48, 48)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -144,7 +159,7 @@ private Compra compActual = null;
         );
 
         jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrito.png"))); // NOI18N
-        jbAgregar.setText("AGREGAR");
+        jbAgregar.setText("MODIFICAR");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
@@ -207,7 +222,7 @@ private Compra compActual = null;
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregar)
                     .addComponent(jbEliminar)
@@ -237,26 +252,54 @@ private Compra compActual = null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        try { // funciona
+
+        try {
             
-        Integer id = Integer.parseInt(jtfIdCompra.getText());
-      
-        java.util.Date fech = jDateChooser1.getDate();
-       LocalDate fecha = fech.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-       Boolean estado = jrbEstado.isSelected();
-       // Obtener el proveedor seleccionado del JComboBox
-        Proveedor proveedorSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
-        if (compActual== null) {
-            compActual= new Compra(proveedorSeleccionado, fecha, true);
-            compData.agregarCompra(compActual);
-             compActual = null;
-            
-        }
+            Integer id = Integer.parseInt(jtfIdCompra.getText());
+            java.util.Date fechaSeleccionada = jDateChooser1.getDate();
+            LocalDate nuevaFecha = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Boolean estado = jrbEstado.isSelected();
+
+            Compra compraExistente = compData.buscarCompra(id);
+
+            if (compraExistente != null) {
+                compraExistente.setFecha(nuevaFecha);
+
+                compData.actualizarFechaCompra(compraExistente);
+               
+                JOptionPane.showMessageDialog(this, "Fecha de compra modificada correctamente.");
+            } else {
+ 
+                JOptionPane.showMessageDialog(this, "La compra no fue encontrada por el ID proporcionado.");
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Debe ingresar solo  números");
+            JOptionPane.showMessageDialog(this, "Error al modificar la fecha de la compra: " + e.getMessage());
         }
-        
+
         limpiarCampos();
+
+
+//        try { // funciona
+//
+//            Integer id = Integer.parseInt(jtfIdCompra.getText());
+//
+//            java.util.Date fech = jDateChooser1.getDate();
+//            LocalDate fecha = fech.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            Boolean estado = jrbEstado.isSelected();
+//            
+// 
+//        Proveedor proveedorSeleccionado = provData.buscarProveedorPorId(id);
+//        if (compActual== null) {
+//            compActual= new Compra(proveedorSeleccionado, fecha, true);
+//            compData.agregarCompra(compActual);
+//             compActual = null;
+//            
+//        }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this,"Debe ingresar solo  números");
+//        }
+//        
+//        limpiarCampos();
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -266,16 +309,8 @@ private Compra compActual = null;
         compActual = compData.buscarCompra(idCompra);
         if (compActual != null) {
             jtfIdCompra.setText(String.valueOf(compActual.getIdCompra()));
-
-            // Iterar sobre los elementos del JComboBox para buscar y seleccionar el proveedor correspondiente
-            for (int i = 0; i < jcbProveedor.getItemCount(); i++) {
-                Proveedor proveedor = (Proveedor) jcbProveedor.getItemAt(i);
-                if (proveedor.getIdProveedor() == compActual.getProveedor().getIdProveedor()) {
-                    jcbProveedor.setSelectedIndex(i);
-                    break; 
-                }
-            }
-
+            jtfCuit.setText(String.valueOf(compActual.getProveedor().getCuit()));
+            jtfNombre.setText(compActual.getProveedor().getRazonSocial());
             LocalDate lc = compActual.getFecha();
             java.util.Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
             jDateChooser1.setDate(date);
@@ -284,7 +319,6 @@ private Compra compActual = null;
     } catch (NumberFormatException ex) {
         JOptionPane.showMessageDialog(this, "DEBE INGRESAR UN NÚMERO EN ESE CAMPO");
     }
-    
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
@@ -293,18 +327,14 @@ private Compra compActual = null;
     }//GEN-LAST:event_jbExitActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-     if (compActual != null) { // funciona
-        compData.borrarCompraPorCompra(compActual.getIdCompra());
-        compActual = null;
-        limpiarCampos();  
-
-        Proveedor proveedorSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
-        jcbProveedor.removeItem(proveedorSeleccionado);
-
-        JOptionPane.showMessageDialog(this, "La compra se eliminó correctamente.");
-    } else {
-        JOptionPane.showMessageDialog(this, "NO SE SELECCIONÓ NINGUNA COMPRA");
-    }
+    // elimino producto
+        if(compActual!=null){
+           compData.borrarCompraPorCompra(compActual.getIdCompra());
+           compActual=null;
+           limpiarCampos();
+       }else{
+           JOptionPane.showMessageDialog(this, "No hay un producto seleccionado");
+       }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
@@ -320,6 +350,7 @@ private Compra compActual = null;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbActualizar;
@@ -327,8 +358,9 @@ private Compra compActual = null;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbExit;
-    private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private javax.swing.JRadioButton jrbEstado;
+    private javax.swing.JTextField jtfCuit;
     private javax.swing.JTextField jtfIdCompra;
+    private javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables
 }

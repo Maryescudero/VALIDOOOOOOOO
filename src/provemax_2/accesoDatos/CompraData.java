@@ -141,7 +141,7 @@ public class CompraData {
             }
 
             compra.setFecha(rs.getDate("fecha").toLocalDate());
-            compra.setEstado(false); // Ya que se está buscando compras inactivas
+            compra.setEstado(false); // buscando compras inactivas
 
             compras.add(compra);
         }
@@ -182,21 +182,37 @@ public class CompraData {
                 LocalDate fecha = resultSet.getDate("fecha").toLocalDate();
                 boolean estado = resultSet.getBoolean("estado");
 
-                // Lógica para obtener el objeto Proveedor asociado a través de ProveedorData
+                // obtener el objeto Proveedor 
                 Proveedor proveedor = provData.buscarProveedorPorId(idCompra);
 
-                // Luego, creas un objeto Compra con los datos obtenidos
+                //  creas un objeto Compra con los datos obtenidos
                 Compra compra = new Compra(idCompra, proveedor, fecha, estado);
                 comprasEnRango.add(compra);
             }
             }catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al conectar con la tabla compra: " + e.getMessage());
-        e.printStackTrace();
+       
     }
 
             return comprasEnRango;
         }
+    
+    
+    public void actualizarFechaCompra(Compra compra) {
+        
+        String sql= "UPDATE compra SET fecha = ? WHERE idCompra = ?";
+        try {
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setDate(1, java.sql.Date.valueOf(compra.getFecha())); 
+            statement.setInt(2, compra.getIdCompra());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al conectar con la tabla compra: " + e.getMessage());
+           
+        }
     }
+    
+}
 
 
 

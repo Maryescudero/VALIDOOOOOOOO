@@ -302,28 +302,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
     limpiarCampos();
 
-//        // agrego producto
-//        String nombreProducto=jtNombreProducto.getText();
-//        String descripcion=jtDescripcionProducto.getText();
-//        double precioActual = Double.parseDouble(jtPrecioActual.getText());
-//        Integer stock=Integer.parseInt(jtStock.getText());
-//        Integer stockMinimo= Integer.parseInt(jtStockMinimo.getText());
-//        Boolean estado= jrbEstado.isSelected();
-//        
-//       if(productoActual==null){
-//           productoActual=new Producto(nombreProducto,descripcion,precioActual,stock,estado,stockMinimo);
-//           
-//           producData.guardarProducto(productoActual);
-//       }else{
-//           productoActual.setNombreProducto(nombreProducto);
-//           productoActual.setDescripcion(descripcion);
-//           productoActual.setPrecioActual(precioActual);
-//           productoActual.setStock(stock);
-//           productoActual.setStockMinimo(stockMinimo);
-//           
-//           producData.modificarProducto(productoActual);
-//       }
-//          limpiarCampos();
+
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed

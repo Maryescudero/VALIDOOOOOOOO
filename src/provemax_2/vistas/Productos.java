@@ -78,7 +78,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel1.setFont(new java.awt.Font("Algerian", 3, 36)); // NOI18N
-        jLabel1.setText("PROCUCTOS");
+        jLabel1.setText("PRODUCTOS");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jLabel2.setText("COD. PRODUCTO : ");

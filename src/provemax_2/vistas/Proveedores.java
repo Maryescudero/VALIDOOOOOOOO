@@ -313,25 +313,34 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(proveedor.isEstado());
     }
     
-    
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-         try {
-        String razonSocial = jtfRazonSocial.getText().trim(); // Obtener el texto del campo de razón social
-        String cuit = jtfCuit.getText().trim(); // Obtener el CUIT ingresado
 
-        // Intentar buscar por nombre
-        provActual = provData.buscarProveedorPorNombre(razonSocial);
-        if (provActual != null) {
-            llenarCamposProveedor(provActual);
-        } else {
-            // Si no se encuentra por nombre, intentar buscar por CUIT
-            provActual = provData.buscarProveedorPorCUIT(cuit);
-            if (provActual != null) {
-                llenarCamposProveedor(provActual);
-            } else {
-                // Si no se encuentra por CUIT, intentar buscar por ID (si se ingresó un número)
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+       try {
+        String razonSocial = jtfRazonSocial.getText().trim(); // me limpia los espacios en blanco
+        String cuitText = jtfCuit.getText().trim(); 
+        String idText = jtfIdProveedor.getText().trim(); 
+
+        boolean cuitProv = !cuitText.isEmpty(); // compruebo si mis jtf estan vacios, 
+        boolean idProv = !idText.isEmpty();
+
+        if (cuitProv || idProv) {
+            if (cuitProv) {
                 try {
-                    int idProveedor = Integer.parseInt(jtfIdProveedor.getText().trim());
+                    float cuit = Float.parseFloat(cuitText);
+
+                    // Intentar buscar por CUIT
+                    provActual = provData.buscarProveedorPorCUIT(cuit);
+                    if (provActual != null) {
+                        llenarCamposProveedor(provActual);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Proveedor no encontrado por CUIT");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "El valor ingresado para CUIT no es un número válido.");
+                }
+            } else { // Buscar por ID
+                try {
+                    int idProveedor = Integer.parseInt(idText);
                     provActual = provData.buscarProveedorPorId(idProveedor);
                     if (provActual != null) {
                         llenarCamposProveedor(provActual);
@@ -339,14 +348,60 @@ public class Proveedores extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "Proveedor no encontrado por ID");
                     }
                 } catch (NumberFormatException ex) {
-                    // Si se ingresó texto en el campo de ID o si no se encontró por ninguno de los criterios
-                    JOptionPane.showMessageDialog(this, "No se encontró el proveedor por nombre, CUIT o ID");
+                    JOptionPane.showMessageDialog(this, "El valor ingresado para ID no es válido.");
                 }
+            }
+        } else {
+            // busca por nombre si no se proporcionó ni CUIT ni ID
+            provActual = provData.buscarProveedorPorNombre(razonSocial);
+            if (provActual != null) {
+                llenarCamposProveedor(provActual);
+            } else {
+                JOptionPane.showMessageDialog(null, "Proveedor no encontrado por nombre");
             }
         }
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, "HA OCURRIDO UN ERROR");
     }
+     
+    
+    
+
+
+
+//         try {
+//        String razonSocial = jtfRazonSocial.getText().trim(); // Obtener el texto del campo de razón social
+//        float cuit = Float.parseFloat(jtfCuit.getText().trim());
+//
+//        // Intentar buscar por nombre
+//        provActual = provData.buscarProveedorPorNombre(razonSocial);
+//        if (provActual != null) {
+//            llenarCamposProveedor(provActual);
+//        } else {
+//            // Si no se encuentra por nombre, intentar buscar por CUIT
+//            provActual = provData.buscarProveedorPorCUIT(cuit);
+//            if (provActual != null) {
+//                llenarCamposProveedor(provActual);
+//            } else {
+//                // Si no se encuentra por CUIT, intentar buscar por ID (si se ingresó un número)
+//                try {
+//                    int idProveedor = Integer.parseInt(jtfIdProveedor.getText().trim());
+//                    provActual = provData.buscarProveedorPorId(idProveedor);
+//                    if (provActual != null) {
+//                        llenarCamposProveedor(provActual);
+//                    } else {
+//                        JOptionPane.showMessageDialog(null, "Proveedor no encontrado por ID");
+//                    }
+//                } catch (NumberFormatException ex) {
+//                    // Si se ingresó texto en el campo de ID o si no se encontró por ninguno de los criterios
+//                    JOptionPane.showMessageDialog(this, "No se encontró el proveedor por nombre, CUIT o ID");
+//                }
+//            }
+//        }
+//    } catch (Exception ex) {
+//         ex.printStackTrace(); // Imprimir el stack trace de la excepción en la consola
+//    JOptionPane.showMessageDialog(this, "HA OCURRIDO UN ERROR: " + ex.getMessage());
+//    }
         
 
     }//GEN-LAST:event_jbBuscarActionPerformed

@@ -51,61 +51,58 @@ public class ProveedorData {
       
       
         public Proveedor buscarProveedorPorId(int id){  // Productos por id
-        String sql= " SELECT cuit,razonSocial, domicilio, telefono "
-                + " FROM proveedor WHERE idProveedor = ? AND estado = 1 ";
-        Proveedor proveedor = null;
-         try {
-            PreparedStatement ps= con.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
             
-            if (rs.next()) {
-                proveedor= new Proveedor();
-                proveedor.setIdProveedor(id);
-                proveedor.setCuit(rs.getFloat("cuit"));
-                proveedor.setRazonSocial(rs.getString("razonSocial"));
-                proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getString("telefono"));
-                proveedor.setEstado(true);
-            }else{
-                JOptionPane.showMessageDialog(null,"Proveedoro No encontrado, o inactivo ");
-                ps.close();
+              String sql = "SELECT * FROM proveedor WHERE idProveedor = ?";
+        Proveedor proveedorEncontrado = null;
+        try {
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                
+                proveedorEncontrado = new Proveedor();
+                proveedorEncontrado.setIdProveedor(resultSet.getInt("idProveedor"));
+                proveedorEncontrado.setRazonSocial(resultSet.getString("razonSocial"));
+                proveedorEncontrado.setDomicilio(resultSet.getString("domicilio"));
+                proveedorEncontrado.setTelefono(resultSet.getString("telefono"));
+                proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
+                
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor"+ ex);
+        } catch (SQLException exception) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor"+ exception);
         }
         
-        return proveedor;
+        return proveedorEncontrado;
+
     }
         
        
        public Proveedor buscarProveedorPorNombre(String nombre){  // Proveedor por nombre
-        String sql= "SELECT idProveedor,cuit,domicilio,telefono "
-                + " FROM proveedor WHERE razonSocial= ? AND estado = 1";
-        Proveedor proveedor = null;
-         try {
-            PreparedStatement ps= con.prepareStatement(sql);
-            ps.setString(1, nombre);
-            ResultSet rs = ps.executeQuery();
+     
+        String sql = "SELECT * FROM proveedor WHERE razonSocial = ?";
+        Proveedor proveedorEncontrado = null;
+        try {
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, nombre);
+            ResultSet resultSet = statement.executeQuery();
             
-            if (rs.next()) {
-                proveedor= new Proveedor();
-                proveedor.setRazonSocial(nombre);
-               proveedor.setIdProveedor(rs.getInt("idProveedor"));
-               proveedor.setCuit(rs.getFloat("cuit"));
-                proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getString("telefono"));
-               
-                proveedor.setEstado(true);
-            }else{
-//                JOptionPane.showMessageDialog(null,"Proveedor No encontrado");
-                ps.close();
+            if (resultSet.next()) {
+                
+                proveedorEncontrado = new Proveedor();
+                proveedorEncontrado.setIdProveedor(resultSet.getInt("idProveedor"));
+                proveedorEncontrado.setRazonSocial(resultSet.getString("razonSocial"));
+                proveedorEncontrado.setDomicilio(resultSet.getString("domicilio"));
+                proveedorEncontrado.setTelefono(resultSet.getString("telefono"));
+                proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
+                
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor");
+        } catch (SQLException exception) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor"+ exception);
         }
-         
-        return proveedor;
+        
+        return proveedorEncontrado;
+    
     }
      
     
@@ -215,28 +212,29 @@ public class ProveedorData {
            
         
     }
-      public Proveedor buscarProveedorPorCUIT(String cuit) {
+      public Proveedor buscarProveedorPorCUIT(float cuit) {
+           String sql = "SELECT * FROM proveedor WHERE cuit = ?";
+        Proveedor proveedorEncontrado = null;
         try {
-       
-            String sql = "SELECT * FROM proveedores WHERE cuit = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setFloat(1, Float.parseFloat(cuit)); // Convertir el CUIT a float para la consulta
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                Proveedor proveedor = new Proveedor();
-                proveedor.setIdProveedor(rs.getInt("id"));
-                proveedor.setRazonSocial(rs.getString("nombre"));
-                proveedor.setCuit(rs.getFloat("cuit"));// Obtener directamente como String
-                proveedor.setDomicilio(rs.getString("domicilio"));
-                proveedor.setTelefono(rs.getString("telefono"));
-                proveedor.setEstado(true);
-
-                return proveedor;
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setFloat(1, cuit);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                
+                proveedorEncontrado = new Proveedor();
+                proveedorEncontrado.setIdProveedor(resultSet.getInt("idProveedor"));
+                proveedorEncontrado.setRazonSocial(resultSet.getString("razonSocial"));
+                proveedorEncontrado.setDomicilio(resultSet.getString("domicilio"));
+                proveedorEncontrado.setTelefono(resultSet.getString("telefono"));
+                proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
+                
             }
-        } catch (SQLException | NumberFormatException ex) {
-            ex.printStackTrace(); // Manejo de excepciones (puedes mostrar un mensaje de error, registrar el error, etc.)
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor");
         }
-        return null;
+        
+        return proveedorEncontrado;
+
 }
 }

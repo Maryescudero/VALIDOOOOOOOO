@@ -107,14 +107,7 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
             jcbProducto.addItem(item);
         }
     }
-//     private void cargarCompras() {
-//        for (Compra item : listComp) {
-//            jcbCompra.addItem(item);
-//        }
-//    }
-     
-    
-     
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -406,7 +399,7 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
         if (compActual== null) {
             compActual= new Compra(proveedorSeleccionado, fecha, true);
             compData.agregarCompra(compActual);
-//             compActual = null;
+
               // Agregar los datos del proveedor a la tabla
         DefaultTableModel modelo1 = (DefaultTableModel) jtProveedor.getModel();
         Object[] fila = {proveedorSeleccionado.getIdProveedor(), proveedorSeleccionado.getCuit(), proveedorSeleccionado.getRazonSocial()};
@@ -426,7 +419,6 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
             int cantidad = (int) jsCantidad.getValue();
             double precioCosto = Double.parseDouble(jtfPrecio.getText());
             Compra compraSeleccionada = compActual;
-//            Compra compraSeleccionada = (Compra) jcbCompra.getSelectedItem();
             Producto productoSeleccionado = (Producto) jcbProducto.getSelectedItem();
 
             if (prodData.verificarStockSuficiente(productoSeleccionado, cantidad)) {
@@ -445,7 +437,7 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
                 double precioCostoTotal = precioUnitario * cantidad;
                 double precioTotalProductos = precioCosto * cantidad;
 
-                // Colocar resultados en los campos correspondientes
+
                 jtfPrecioCosto.setText(String.valueOf(precioCostoTotal));
                 jtfPrecioTotal.setText(String.valueOf(precioTotalProductos));
 

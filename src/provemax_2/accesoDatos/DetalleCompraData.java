@@ -146,6 +146,7 @@ public class DetalleCompraData {
             detalleCompra = new DetalleCompra(cantidad, precioCosto, compra, producto);
             detalleCompra.setIdDetalle(idDetalleCompra);
         }
+         ps.close();
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla: " + ex.getMessage());
     }

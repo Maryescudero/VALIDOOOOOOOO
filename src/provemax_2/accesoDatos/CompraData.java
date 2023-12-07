@@ -145,6 +145,7 @@ public class CompraData {
 
             compras.add(compra);
         }
+         ps.close();
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla: " + ex.getMessage());
     }
@@ -189,6 +190,7 @@ public class CompraData {
                 Compra compra = new Compra(idCompra, proveedor, fecha, estado);
                 comprasEnRango.add(compra);
             }
+           
             }catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error al conectar con la tabla compra: " + e.getMessage());
        

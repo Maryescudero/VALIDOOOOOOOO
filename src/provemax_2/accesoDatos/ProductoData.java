@@ -136,6 +136,7 @@ public class ProductoData {
             if(exito==1){
                 JOptionPane.showMessageDialog(null,"producto modificado");
             }
+             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto" + ex.getMessage());
         }
@@ -153,6 +154,7 @@ public class ProductoData {
            if(exito==1){
                JOptionPane.showMessageDialog(null,"Producto INACTIVO por falta de Stock ");
            }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al aceder a la tabla PRODUCTO " +ex.getMessage());
         }
@@ -180,7 +182,7 @@ public class ProductoData {
                     productos.add(producto);
                     
                 }
-            
+             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla producto" + ex.getMessage());
         }
@@ -212,6 +214,7 @@ public class ProductoData {
                     productos.add(producto);
                     
                 }
+              ps.close();
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla producto" + ex.getMessage());
@@ -230,6 +233,7 @@ public class ProductoData {
             if (modificado == 1) {
                 JOptionPane.showMessageDialog(null, "Eliminado");
             }
+             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla producto" + ex.getMessage());
         }

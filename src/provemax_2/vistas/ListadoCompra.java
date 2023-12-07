@@ -63,6 +63,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtCompras = new javax.swing.JTable();
@@ -136,6 +137,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jrbComprasActivas);
         jrbComprasActivas.setText("COMPRAS ACTIVAS");
         jrbComprasActivas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -369,6 +371,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

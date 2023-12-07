@@ -1,7 +1,9 @@
 
 package provemax_2.vistas;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import provemax_2.accesoDatos.ProveedorData;
 import provemax_2.entidades.Proveedor;
 
@@ -10,10 +12,34 @@ import provemax_2.entidades.Proveedor;
 public class Proveedores extends javax.swing.JInternalFrame {
       private ProveedorData provData = new ProveedorData();
       private Proveedor provActual = null;
-              
+       private DefaultTableModel modelo;       
     public Proveedores() {
         initComponents();
         this.setTitle("PROVEEDOR");
+        this.setTitle("Listado Proveedores ");
+        provData = new ProveedorData();
+        modelo = new DefaultTableModel();
+        
+        armarCabecera();
+    }
+     private void armarCabecera() { // armo la cabecera de mi tabla
+        ArrayList<Object> filaCabecera = new ArrayList<>();
+        filaCabecera.add("id");
+        filaCabecera.add("cuit");
+        filaCabecera.add("razon social");
+        filaCabecera.add("domicilio");
+        filaCabecera.add("telefono");
+        for (Object it : filaCabecera) {
+            modelo.addColumn(it);
+        }
+        jTProveedor.setModel(modelo);
+    }
+    
+     private void limpiarTabla() {
+        // Limpiar todas las filas de la tabla
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
     }
     
        private void limpiarCampos() {
@@ -25,6 +51,24 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(true);
        
     }
+       private void actualizarTabla(boolean esActivo) {
+        // Limpiar la tabla antes de actualizarla
+        limpiarTabla();
+
+        // Obtener la lista de proveedores según el estado seleccionado
+        ArrayList<Proveedor> listaProveedores = esActivo ? provData.listarProveedores() : provData.listarProveedoresInactivos();
+
+        // Agregar filas a la tabla
+        for (Proveedor proveedor : listaProveedores) {
+            modelo.addRow(new Object[]{
+                proveedor.getIdProveedor(),
+                proveedor.getCuit(),
+                proveedor.getRazonSocial(),
+                proveedor.getDomicilio(),
+                proveedor.getTelefono()
+            });
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +79,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grupProvee2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -56,6 +101,11 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jbExit = new javax.swing.JButton();
         jbActualizar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTProveedor = new javax.swing.JTable();
+        jRBProvActivo = new javax.swing.JRadioButton();
+        jRBProvInactivo = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(120, 146, 199));
 
@@ -196,6 +246,45 @@ public class Proveedores extends javax.swing.JInternalFrame {
             }
         });
 
+        jTProveedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTProveedor);
+
+        grupProvee2.add(jRBProvActivo);
+        jRBProvActivo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jRBProvActivo.setText("Prov.Activos");
+        jRBProvActivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBProvActivoActionPerformed(evt);
+            }
+        });
+
+        grupProvee2.add(jRBProvInactivo);
+        jRBProvInactivo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jRBProvInactivo.setText("Prov.Inactivos");
+        jRBProvInactivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBProvInactivoActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton1.setText("Actualizar Lista");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -205,47 +294,62 @@ public class Proveedores extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
                         .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108)
-                        .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(jLabel1)
-                        .addContainerGap(327, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(119, 119, 119)
+                        .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(90, 90, 90))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(154, 154, 154))))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jRBProvActivo)
+                                .addGap(124, 124, 124)
+                                .addComponent(jRBProvInactivo)
+                                .addGap(78, 78, 78))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel1)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 33, Short.MAX_VALUE)
+                        .addGap(108, 108, 108)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jRBProvActivo)
+                                    .addComponent(jRBProvInactivo))
+                                .addGap(37, 37, 37)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbAgregar)
                             .addComponent(jbEliminar)
-                            .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -426,8 +530,30 @@ public class Proveedores extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_jbActualizarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         // Botón "Actualizar" presionado
+        if (jRBProvActivo.isSelected()) {
+            // Actualizar tabla con proveedores activos
+           actualizarTabla(true);
+        } else if (jRBProvInactivo.isSelected()) {
+            // Actualizar tabla con proveedores inactivos
+            actualizarTabla(false);
+        }
+        limpiarTabla();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRBProvActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBProvActivoActionPerformed
+        actualizarTabla(true);
+    }//GEN-LAST:event_jRBProvActivoActionPerformed
+
+    private void jRBProvInactivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBProvInactivoActionPerformed
+         actualizarTabla(false);
+    }//GEN-LAST:event_jRBProvInactivoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup grupProvee2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -438,6 +564,10 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRBProvActivo;
+    private javax.swing.JRadioButton jRBProvInactivo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTProveedor;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;

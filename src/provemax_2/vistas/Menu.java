@@ -44,10 +44,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jrmProveedor = new javax.swing.JRadioButtonMenuItem();
-        jrmListadoProveedor = new javax.swing.JRadioButtonMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jrmCompra = new javax.swing.JRadioButtonMenuItem();
         jrmListadoCompra = new javax.swing.JRadioButtonMenuItem();
@@ -94,15 +92,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jRadioButtonMenuItem1);
 
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("Listado de Productos");
-        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jRadioButtonMenuItem2);
-
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-agregar-administrador-50.png"))); // NOI18N
@@ -117,15 +106,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jrmProveedor);
-
-        jrmListadoProveedor.setSelected(true);
-        jrmListadoProveedor.setText("Listado Proveedores");
-        jrmListadoProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrmListadoProveedorActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jrmListadoProveedor);
 
         jMenuBar1.add(jMenu2);
 
@@ -242,15 +222,6 @@ public class Menu extends javax.swing.JFrame {
         salida.setVisible(true);
     }//GEN-LAST:event_jrmExitActionPerformed
 
-    private void jrmListadoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrmListadoProveedorActionPerformed
-         jDesktopPane1.removeAll();
-        jDesktopPane1.repaint();
-        ListadoProveedor listprov = new ListadoProveedor();
-        listprov.setVisible(true);
-        jDesktopPane1.add(listprov);
-        jDesktopPane1.moveToFront(listprov);
-    }//GEN-LAST:event_jrmListadoProveedorActionPerformed
-
     private void jrmListadoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrmListadoCompraActionPerformed
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
@@ -268,15 +239,6 @@ public class Menu extends javax.swing.JFrame {
         jDesktopPane1.add(productos);
         jDesktopPane1.moveToFront(productos);
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
-
-    private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
-         jDesktopPane1.removeAll();
-        jDesktopPane1.repaint();
-        ListaProductos listprod = new ListaProductos();
-        listprod.setVisible(true);
-        jDesktopPane1.add(listprod);
-        jDesktopPane1.moveToFront(listprod);
-    }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     private void jrmNuevasComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrmNuevasComprasActionPerformed
             jDesktopPane1.removeAll();
@@ -332,12 +294,10 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JRadioButtonMenuItem jrmCompra;
     private javax.swing.JRadioButtonMenuItem jrmDetalle;
     private javax.swing.JRadioButtonMenuItem jrmExit;
     private javax.swing.JRadioButtonMenuItem jrmListadoCompra;
-    private javax.swing.JRadioButtonMenuItem jrmListadoProveedor;
     private javax.swing.JRadioButtonMenuItem jrmNuevasCompras;
     private javax.swing.JRadioButtonMenuItem jrmProveedor;
     // End of variables declaration//GEN-END:variables

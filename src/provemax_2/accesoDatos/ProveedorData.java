@@ -69,6 +69,7 @@ public class ProveedorData {
                 proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
                 
             }
+             statement.close();
         } catch (SQLException exception) {
              JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor"+ exception);
         }
@@ -97,6 +98,7 @@ public class ProveedorData {
                 proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
                 
             }
+             statement.close();
         } catch (SQLException exception) {
              JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor"+ exception);
         }
@@ -125,6 +127,7 @@ public class ProveedorData {
             if (modificado == 1) {
                 JOptionPane.showMessageDialog(null,"proveedor modificado");
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla proveedor" + ex.getMessage());
         }
@@ -140,6 +143,7 @@ public class ProveedorData {
             if (modificado >0) {
                 JOptionPane.showMessageDialog(null,"proveedor inactivo");
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla proveedor" + ex.getMessage());
         }
@@ -155,6 +159,7 @@ public class ProveedorData {
             if (modificado == 1) {
                 JOptionPane.showMessageDialog(null,"Proveedor inactivo");
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla proveedor" + ex.getMessage());
         }
@@ -180,6 +185,7 @@ public class ProveedorData {
             proveedor1.setEstado(true);
             proveedor.add(proveedor1);
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null ,"Error al conectar con la tabla proveedor");
         }
@@ -205,6 +211,7 @@ public class ProveedorData {
             proveedor1.setEstado(true);
             proveedor.add(proveedor1);
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null ,"Error al conectar con la tabla proveedor");
         }
@@ -229,7 +236,9 @@ public class ProveedorData {
                 proveedorEncontrado.setTelefono(resultSet.getString("telefono"));
                 proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
                 
-            }
+            }  
+            
+             statement.close();
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor");
         }

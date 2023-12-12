@@ -89,31 +89,32 @@ public class ProductoData {
         return producto;
     }
    public Producto buscarProductosPorNombre(String nombre){  // busqueda Productos por nombre
-        String sql= "SELECT idProducto,descripcion, precioActual, precioActual,stock, stockMinimo "
-                + " FROM producto WHERE nombreProducto= ? AND estado = 1";
+
+ String sql = "SELECT idProducto, nombreProducto, descripcion, precioActual, stock, stockMinimo "
+                + "FROM producto WHERE nombreProducto LIKE ? AND estado = 1";
         Producto producto = null;
-         try {
-            PreparedStatement ps= con.prepareStatement(sql);
-            ps.setString(1, nombre);
-            ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()) {
-                producto= new Producto();
-                producto.setNombreProducto(nombre);
-                producto.setIdProducto(rs.getInt("idProducto"));
-                producto.setDescripcion(rs.getString("descripcion"));
-                producto.setPrecioActual(rs.getDouble("precioActual"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setStockMinimo(rs.getInt("stockMinimo"));
-                producto.setEstado(true);
-            }else{
-                JOptionPane.showMessageDialog(null,"Producto No encontrado, No hay stock");
-                ps.close();
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "%" + nombre + "%");
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String nombreEncontrado = rs.getString("nombreProducto");
+                    producto = new Producto();
+                    producto.setNombreProducto(nombreEncontrado);
+                    producto.setIdProducto(rs.getInt("idProducto"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+                    producto.setPrecioActual(rs.getDouble("precioActual"));
+                    producto.setStock(rs.getInt("stock"));
+                    producto.setStockMinimo(rs.getInt("stockMinimo"));
+                    producto.setEstado(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Producto no encontrado, no hay stock");
+                }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla producto" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto: " + ex.getMessage());
         }
-        
+
         return producto;
     }
   
@@ -288,6 +289,40 @@ public class ProductoData {
 
         return suficienteStock;
     }
+    
+    public ArrayList<Producto> listarProductosDeCompra(int idCompra) {
+    String sql = "SELECT p.idProducto, p.nombreProducto, p.descripcion, p.precioActual, p.stock, p.stockMinimo " +
+                 "FROM producto p " +
+                 "INNER JOIN detallecompra dc ON p.idProducto = dc.idProducto " +
+                 "WHERE dc.idCompra = ?";
+    
+    ArrayList<Producto> productos = new ArrayList<>();
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, idCompra); // Establecer el ID de la compra en la consulta SQL
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Producto producto = new Producto();
+            producto.setIdProducto(rs.getInt("idProducto"));
+            producto.setNombreProducto(rs.getString("nombreProducto"));
+            producto.setDescripcion(rs.getString("descripcion"));
+            producto.setPrecioActual(rs.getDouble("precioActual"));
+            producto.setStock(rs.getInt("stock"));
+            producto.setStockMinimo(rs.getInt("stockMinimo"));
+            producto.setEstado(true); // Podrías establecer el estado del producto si lo necesitas
+            productos.add(producto);
+        }
+
+        ps.close();
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener productos de la compra: " + ex.getMessage());
+    }
+
+    return productos;
 }
+}
+
 
 

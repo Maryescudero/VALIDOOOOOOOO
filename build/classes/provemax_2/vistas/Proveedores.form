@@ -76,7 +76,7 @@
                                   <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jbActualizarLista" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                                   <Component id="jbExit" min="-2" pref="190" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -141,7 +141,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jbEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jbAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="jbActualizarLista" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="jbExit" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -447,7 +447,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRBProvInactivoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jbActualizarLista">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="1"/>
@@ -458,7 +458,7 @@
             <Property name="text" type="java.lang.String" value="Actualizar Lista"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbActualizarListaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">

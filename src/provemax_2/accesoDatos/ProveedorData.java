@@ -55,9 +55,9 @@ public class ProveedorData {
               String sql = "SELECT * FROM proveedor WHERE idProveedor = ?";
         Proveedor proveedorEncontrado = null;
         try {
-            PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
             
             if (resultSet.next()) {
                 
@@ -69,7 +69,7 @@ public class ProveedorData {
                 proveedorEncontrado.setCuit(resultSet.getFloat("cuit"));
                 
             }
-             statement.close();
+             ps.close();
         } catch (SQLException exception) {
              JOptionPane.showMessageDialog(null, "Error al acceder a tabla Proveedor"+ exception);
         }

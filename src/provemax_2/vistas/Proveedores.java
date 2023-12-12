@@ -105,7 +105,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         jTProveedor = new javax.swing.JTable();
         jRBProvActivo = new javax.swing.JRadioButton();
         jRBProvInactivo = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jbActualizarLista = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
 
@@ -282,12 +282,12 @@ public class Proveedores extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anadir.png"))); // NOI18N
-        jButton1.setText("Actualizar Lista");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbActualizarLista.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jbActualizarLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/anadir.png"))); // NOI18N
+        jbActualizarLista.setText("Actualizar Lista");
+        jbActualizarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbActualizarListaActionPerformed(evt);
             }
         });
 
@@ -323,7 +323,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
                                 .addComponent(jRBProvActivo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(152, 152, 152))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jbActualizarLista)
                                 .addGap(150, 150, 150)
                                 .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(65, 65, 65))))
@@ -373,7 +373,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbEliminar)
                             .addComponent(jbAgregar)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbActualizarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(19, 19, 19))))
         );
@@ -432,6 +432,8 @@ public class Proveedores extends javax.swing.JInternalFrame {
         }
         
         limpiarCampos();
+     
+
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void llenarCamposProveedor(Proveedor proveedor) {
@@ -493,46 +495,6 @@ public class Proveedores extends javax.swing.JInternalFrame {
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, "HA OCURRIDO UN ERROR");
     }
-     
-    
-    
-
-
-
-//         try {
-//        String razonSocial = jtfRazonSocial.getText().trim(); // Obtener el texto del campo de razón social
-//        float cuit = Float.parseFloat(jtfCuit.getText().trim());
-//
-//        // Intentar buscar por nombre
-//        provActual = provData.buscarProveedorPorNombre(razonSocial);
-//        if (provActual != null) {
-//            llenarCamposProveedor(provActual);
-//        } else {
-//            // Si no se encuentra por nombre, intentar buscar por CUIT
-//            provActual = provData.buscarProveedorPorCUIT(cuit);
-//            if (provActual != null) {
-//                llenarCamposProveedor(provActual);
-//            } else {
-//                // Si no se encuentra por CUIT, intentar buscar por ID (si se ingresó un número)
-//                try {
-//                    int idProveedor = Integer.parseInt(jtfIdProveedor.getText().trim());
-//                    provActual = provData.buscarProveedorPorId(idProveedor);
-//                    if (provActual != null) {
-//                        llenarCamposProveedor(provActual);
-//                    } else {
-//                        JOptionPane.showMessageDialog(null, "Proveedor no encontrado por ID");
-//                    }
-//                } catch (NumberFormatException ex) {
-//                    // Si se ingresó texto en el campo de ID o si no se encontró por ninguno de los criterios
-//                    JOptionPane.showMessageDialog(this, "No se encontró el proveedor por nombre, CUIT o ID");
-//                }
-//            }
-//        }
-//    } catch (Exception ex) {
-//         ex.printStackTrace(); // Imprimir el stack trace de la excepción en la consola
-//    JOptionPane.showMessageDialog(this, "HA OCURRIDO UN ERROR: " + ex.getMessage());
-//    }
-        
 
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -556,7 +518,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
         limpiarCampos();
     }//GEN-LAST:event_jbActualizarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbActualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarListaActionPerformed
          // Botón "Actualizar" presionado
         if (jRBProvActivo.isSelected()) {
             // Actualizar tabla con proveedores activos
@@ -566,7 +528,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
             actualizarTabla(false);
         }
         limpiarTabla();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbActualizarListaActionPerformed
 
     private void jRBProvActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBProvActivoActionPerformed
         actualizarTabla(true);
@@ -579,7 +541,6 @@ public class Proveedores extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup grupProvee2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -597,6 +558,7 @@ public class Proveedores extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTProveedor;
     private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbActualizarLista;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;

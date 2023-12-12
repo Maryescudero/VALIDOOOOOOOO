@@ -153,7 +153,23 @@ public class DetalleCompraData {
 
     return detalleCompra;
 }
-    
+    public void modificarDetalleCompra(int idCompra, int idProducto, int nuevaCantidad, double nuevoPrecioCosto) {
+        String sql = "UPDATE detalleCompra SET cantidad = ?, precioCosto = ? WHERE idCompra = ? AND idProducto = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, nuevaCantidad);
+            ps.setDouble(2, nuevoPrecioCosto);
+            ps.setInt(3, idCompra);
+            ps.setInt(4, idProducto);
+            int modificado = ps.executeUpdate();
+            if (modificado > 0) {
+                JOptionPane.showMessageDialog(null, "Detalle de compra modificado");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el detalle de compra: " + ex.getMessage());
+        }
+}
 }
       
      

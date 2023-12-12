@@ -106,7 +106,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jtDescripcionProducto = new javax.swing.JTextField();
         jtPrecioActual = new javax.swing.JTextField();
         jbAgregar = new javax.swing.JButton();
-        jbBuscarNombre = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbExit = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
@@ -123,7 +122,7 @@ public class Productos extends javax.swing.JInternalFrame {
         jTproductos = new javax.swing.JTable();
         jRBProdActivos = new javax.swing.JRadioButton();
         jRBProdInactivos = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jBActLista = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -148,15 +147,6 @@ public class Productos extends javax.swing.JInternalFrame {
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
-            }
-        });
-
-        jbBuscarNombre.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jbBuscarNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-carpeta-de-documentos-25.png"))); // NOI18N
-        jbBuscarNombre.setText("BUSQUEDA");
-        jbBuscarNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarNombreActionPerformed(evt);
             }
         });
 
@@ -198,7 +188,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jbLimpiar.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jbLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-escoba-16.png"))); // NOI18N
-        jbLimpiar.setText("ACTUALIZAR");
+        jbLimpiar.setText("LIMPIAR");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbLimpiarActionPerformed(evt);
@@ -220,13 +210,28 @@ public class Productos extends javax.swing.JInternalFrame {
 
         jRBProdActivos.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jRBProdActivos.setText("Prod. Activos");
+        jRBProdActivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBProdActivosActionPerformed(evt);
+            }
+        });
 
         jRBProdInactivos.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         jRBProdInactivos.setText("Prod. Inactivos");
+        jRBProdInactivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBProdInactivosActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo-producto.png"))); // NOI18N
-        jButton1.setText("ACTUALIZAR LIST");
+        jBActLista.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jBActLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo-producto.png"))); // NOI18N
+        jBActLista.setText("ACTUALIZAR LIST");
+        jBActLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBActListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,9 +264,7 @@ public class Productos extends javax.swing.JInternalFrame {
                                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(jrbEstado)
                                                         .addComponent(jtCodigoProducto))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGap(24, 24, 24))
+                                                    .addGap(71, 71, 71))
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jtDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGap(76, 76, 76)))
@@ -269,34 +272,35 @@ public class Productos extends javax.swing.JInternalFrame {
                                                 .addComponent(jtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(76, 76, 76))))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(76, 76, 76)
-                                        .addComponent(jbBuscarNombre))))
+                                        .addGap(84, 84, 84)
+                                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel4))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jbLimpiar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24))
+                                .addComponent(jbLimpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel8))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jtStockMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addComponent(jtNombreProducto)
                                     .addComponent(jtPrecioActual))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(119, 119, 119)
+                                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(34, 34, 34))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButton1)
+                                    .addComponent(jBActLista)
                                     .addGap(88, 88, 88)
                                     .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(44, 44, 44)))
@@ -310,7 +314,7 @@ public class Productos extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -335,11 +339,11 @@ public class Productos extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jRBProdActivos)
                                         .addComponent(jRBProdInactivos))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2))
-                                        .addComponent(jbBuscar)))))
+                                            .addComponent(jLabel2))))))
                         .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -361,13 +365,14 @@ public class Productos extends javax.swing.JInternalFrame {
                         .addGap(51, 51, 51)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAgregar)
-                    .addComponent(jbBuscarNombre)
-                    .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbEliminar))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbAgregar)
+                        .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBActLista, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbEliminar))
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -451,44 +456,48 @@ public class Productos extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    private void jbBuscarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarNombreActionPerformed
-        // busco por nombre
-        String nombreProducto = jtNombreProducto.getText();
-        productoActual = producData.buscarProductosPorNombre(nombreProducto);
-        if (productoActual != null) {
-            jtCodigoProducto.setText(String.valueOf(productoActual.getIdProducto()));
-            jtDescripcionProducto.setText(productoActual.getDescripcion());
-            jtPrecioActual.setText(String.valueOf(productoActual.getPrecioActual()));
-            jtStock.setText(String.valueOf(productoActual.getStock()));
-            jtStockMinimo.setText(String.valueOf(productoActual.getStockMinimo()));
-            jrbEstado.setSelected(productoActual.isEstado());
-        } else {
-            JOptionPane.showMessageDialog(null, "Producto no encontrado o no disponible en stock");
-          
-            limpiarCampos();
-        }
-    }//GEN-LAST:event_jbBuscarNombreActionPerformed
-
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // busco por id
-         try{
-            Integer idProducto=Integer.parseInt(jtCodigoProducto.getText());
-        
-        productoActual=producData.buscarProductoPorId(idProducto);
-        if(productoActual!=null){
-            
-            jtNombreProducto.setText(productoActual.getNombreProducto());
-            jtDescripcionProducto.setText(productoActual.getDescripcion());
-            jtPrecioActual.setText(String.valueOf(productoActual.getPrecioActual()));
-            jtStock.setText(String.valueOf(productoActual.getStock()));
-            jtStockMinimo.setText(String.valueOf(productoActual.getStockMinimo()));
-            jrbEstado.setSelected(productoActual.isEstado());
+
+        String input = jtNombreProducto.getText();
+
+        if (!input.isEmpty()) {
+            // Búsqueda por nombre
+            buscarProducto(true);
+        } else {
+            // Búsqueda por ID
+            buscarProducto(false);
         }
-        }catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(null,"Debe ingresar un numero valido");
-            
-        }  
-           
+    }
+
+    private void buscarProducto(boolean porNombre) {
+        try {
+            if (porNombre) {
+                // Búsqueda por nombre
+                String nombreProducto = jtNombreProducto.getText();
+                productoActual = producData.buscarProductosPorNombre(nombreProducto);
+            } else {
+                // Búsqueda por ID
+                Integer idProducto = Integer.parseInt(jtCodigoProducto.getText());
+                productoActual = producData.buscarProductoPorId(idProducto);
+            }
+            if (productoActual != null) {
+                // Mostrar la información del producto en los campos correspondientes
+                jtCodigoProducto.setText(String.valueOf(productoActual.getIdProducto()));
+                jtNombreProducto.setText(productoActual.getNombreProducto());
+                jtDescripcionProducto.setText(productoActual.getDescripcion());
+                jtPrecioActual.setText(String.valueOf(productoActual.getPrecioActual()));
+                jtStock.setText(String.valueOf(productoActual.getStock()));
+                jtStockMinimo.setText(String.valueOf(productoActual.getStockMinimo()));
+                jrbEstado.setSelected(productoActual.isEstado());
+            } else {
+                JOptionPane.showMessageDialog(null, "Producto no encontrado o no disponible en stock");
+                limpiarCampos();
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
+        }
+
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
@@ -502,7 +511,7 @@ public class Productos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jBActListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBActListaActionPerformed
-         if (jRBProdActivos.isSelected()) {
+        if (jRBProdActivos.isSelected()) {
             // Actualizar tabla con proveedores activos
             actualizarTabla(true);
         } else if (jRBProdInactivos.isSelected()) {
@@ -524,7 +533,7 @@ public class Productos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBActLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -542,7 +551,6 @@ public class Productos extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTproductos;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBuscar;
-    private javax.swing.JButton jbBuscarNombre;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbExit;
     private javax.swing.JButton jbLimpiar;

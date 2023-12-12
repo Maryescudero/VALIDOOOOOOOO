@@ -107,6 +107,7 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
             jcbProducto.addItem(item);
         }
     }
+  
 
     
     /**
@@ -145,7 +146,9 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
         jtfPrecioCosto = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jtfPrecioTotal = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jbExit = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
 
         fondo.setBackground(new java.awt.Color(248, 250, 125));
         fondo.setPreferredSize(new java.awt.Dimension(1000, 580));
@@ -193,7 +196,7 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
                 .addComponent(jbAgregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbLimpiarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,9 +313,31 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
         jLabel9.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
         jLabel9.setText("Precio Costo :");
 
-        jButton1.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-cerrar-ventana-20.png"))); // NOI18N
-        jButton1.setText("EXIT");
+        jbExit.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jbExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-cerrar-ventana-20.png"))); // NOI18N
+        jbExit.setText("EXIT");
+        jbExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExitActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jbEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-comprobado.gif"))); // NOI18N
+        jbEliminar.setText("ELIMINAR");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reporte1.png"))); // NOI18N
+        jbModificar.setText("MODIFICAR");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
@@ -330,30 +355,35 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
                                 .addGap(398, 398, 398)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(fondoLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fondoLayout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(fondoLayout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jtfPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jLabel9)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jtfPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(fondoLayout.createSequentialGroup()
                                         .addGap(36, 36, 36)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 62, Short.MAX_VALUE)))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(fondoLayout.createSequentialGroup()
+                                        .addGap(51, 51, 51)
+                                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(fondoLayout.createSequentialGroup()
+                                                .addComponent(jbModificar)
+                                                .addGap(48, 48, 48)
+                                                .addComponent(jbEliminar)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(fondoLayout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jtfPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(26, 26, 26)
+                                                .addComponent(jLabel9)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jtfPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGap(0, 48, Short.MAX_VALUE))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 44, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +410,10 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbExit, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbEliminar)
+                    .addComponent(jbModificar))
                 .addGap(29, 29, 29))
         );
 
@@ -392,35 +425,34 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
-        try { // funciona
-            
-        java.util.Date fech = jDateChooser1.getDate();
-       LocalDate fecha = fech.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-       
-       // Obtener el proveedor seleccionado del JComboBox
-        Proveedor proveedorSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
-        if (compActual== null) {
-            compActual= new Compra(proveedorSeleccionado, fecha, true);
-            compData.agregarCompra(compActual);
 
-              // Agregar los datos del proveedor a la tabla
+      try {
+        java.util.Date fech = jDateChooser1.getDate();
+        LocalDate fecha = fech.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+       
+        Proveedor proveedorSeleccionado = (Proveedor) jcbProveedor.getSelectedItem();
+        Compra nuevaCompra = new Compra(proveedorSeleccionado, fecha, true);
+        compData.agregarCompra(nuevaCompra);
+        
+
         DefaultTableModel modelo1 = (DefaultTableModel) jtProveedor.getModel();
         Object[] fila = {proveedorSeleccionado.getIdProveedor(), proveedorSeleccionado.getCuit(), proveedorSeleccionado.getRazonSocial()};
         modelo1.addRow(fila);
-            
-        }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Debe ingresar solo  números");
-        }
+        
+        // Establecer compActual como la nueva compra creada
+        compActual = nuevaCompra;
         
         limpiarCampos();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this,"Debe ingresar solo números");
+    }
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jbAgregarDetalleCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarDetalleCompraActionPerformed
@@ -432,7 +464,6 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
             Producto productoSeleccionado = (Producto) jcbProducto.getSelectedItem();
 
             if (prodData.verificarStockSuficiente(productoSeleccionado, cantidad)) {
-                // Restar el stock después de la compra si hay suficiente
                 prodData.restarStockDespuesCompra(productoSeleccionado, cantidad);
                
                 
@@ -476,6 +507,65 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
         limpiarTabla();
        
     }//GEN-LAST:event_jbLimpiarTablaActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+         int filaSeleccionada = jtDetalleCompra.getSelectedRow(); // Obtengo la fila seleccionada
+
+    if (filaSeleccionada != -1) {
+        int idDetalle = (int) modelo.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna 0 contiene el ID del detalle
+
+        modelo.removeRow(filaSeleccionada); // Eliminar la fila de la tabla 
+
+        DetalleCompraData detalleData = new DetalleCompraData();
+        detaData.eliminar(idDetalle); // Llamar al método para eliminar el detalle en la base de datos
+
+        JOptionPane.showMessageDialog(this, "Detalle de compra eliminado correctamente.", "Eliminación exitosa", JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this, "Selecciona un detalle de compra para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
+        dispose();
+       
+    }//GEN-LAST:event_jbExitActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+       int filaSeleccionada = jtDetalleCompra.getSelectedRow(); 
+
+    if (filaSeleccionada != -1) {
+        try {
+         
+            int idDetalle = (int) modelo.getValueAt(filaSeleccionada, 0); // Suponiendo que la columna 0 contiene el ID del detalle
+            int idCompra = (int) modelo.getValueAt(filaSeleccionada, 3); // Suponiendo que la columna 3 contiene el ID de la compra
+            int idProducto = (int) modelo.getValueAt(filaSeleccionada, 4); // Suponiendo que la columna 4 contiene el ID del producto
+            int cantidad = (int) modelo.getValueAt(filaSeleccionada, 1); // Suponiendo que la columna 1 contiene la cantidad
+            double precioCosto = (double) modelo.getValueAt(filaSeleccionada, 2); // Suponiendo que la columna 2 contiene el precio de costo
+
+            // Ventana de diálogo para modificar la cantidad y el precio de costo
+            String nuevaCantidad = JOptionPane.showInputDialog(this, "Ingrese la nueva cantidad:", cantidad);
+            String nuevoPrecioCosto = JOptionPane.showInputDialog(this, "Ingrese el nuevo precio de costo:", precioCosto);
+
+            if (nuevaCantidad != null && nuevoPrecioCosto != null) { // Si el usuario no presionó "Cancelar"
+                int nuevaCantidadInt = Integer.parseInt(nuevaCantidad);
+                double nuevoPrecioCostoDouble = Double.parseDouble(nuevoPrecioCosto);
+
+                detaData.modificarDetalleCompra(idCompra, idProducto, nuevaCantidadInt, nuevoPrecioCostoDouble);
+
+           
+                modelo.setValueAt(nuevaCantidadInt, filaSeleccionada, 1); 
+                modelo.setValueAt(nuevoPrecioCostoDouble, filaSeleccionada, 2); 
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese valores numéricos válidos para la cantidad y el precio de costo.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Seleccione un detalle de compra para modificar.");
+    }
+    
+    }//GEN-LAST:event_jbModificarActionPerformed
     private void agregarDetalleCompraATabla(DetalleCompra detalleCompra) {
          Object[] fila = new Object[5]; // Número de columnas de tu tabla
     fila[0] = detalleCompra.getIdDetalle(); // toma mi objerto y lo agrega a las filas
@@ -490,7 +580,6 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel fondo;
-    private javax.swing.JButton jButton1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -508,7 +597,10 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbAgregarDetalleCompra;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbExit;
     private javax.swing.JButton jbLimpiarTabla;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JComboBox<Producto> jcbProducto;
     private javax.swing.JComboBox<Proveedor> jcbProveedor;
     private javax.swing.JSpinner jsCantidad;

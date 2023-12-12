@@ -40,7 +40,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
         ArrayList<Object> filaCabecera = new ArrayList<>();
         filaCabecera.add("id");
         filaCabecera.add("Proveedor");
-        filaCabecera.add("fecha");
+        filaCabecera.add("Fecha");
         for (Object it : filaCabecera) {
             modelo.addColumn(it);
         }
@@ -145,6 +145,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup1.add(jrbComprasNoActivas);
         jrbComprasNoActivas.setText("COMPRAS NO ACTIVAS");
         jrbComprasNoActivas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,9 +168,6 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(283, 283, 283)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -186,7 +184,10 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
                             .addComponent(jrbComprasActivas)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(283, 283, 283)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -324,7 +325,7 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void actualizarTabla(boolean esActivo) {
-        // Limpiar la tabla antes de actualizarla
+       
         limpiarTabla();
 
         // Obtener la lista de proveedores según el estado seleccionado
@@ -354,19 +355,20 @@ public class ListadoCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbComprasNoActivasActionPerformed
 
     private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        // Botón "Actualizar" presionado
+
         if (jrbComprasActivas.isSelected()) {
-            // Actualizar tabla con proveedores activos
+
             actualizarTabla(true);
         } else if (jrbComprasNoActivas.isSelected()) {
-            // Actualizar tabla con proveedores inactivos
+
             actualizarTabla(false);
         }
+        limpiarTabla();
     }//GEN-LAST:event_jbActualizarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         dispose();
-         JOptionPane.showMessageDialog(this, "DESEA REGRESAR A LA PAGINA PRINCIPAL");
+         
     }//GEN-LAST:event_jbSalirActionPerformed
 
 

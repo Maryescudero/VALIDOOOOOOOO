@@ -85,7 +85,7 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
         jDateChooser1.setDate(new Date());
         jtfPrecio.setText("");
         jcbProducto.setSelectedIndex(-1);
-//        jcbCompra.setSelectedIndex(-1);
+       
 
         
     }
@@ -94,6 +94,12 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
       
         while (modelo1.getRowCount() > 0) {
             modelo1.removeRow(0);
+        }
+    }
+     private void vaciarTabla() {
+      
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
         }
     }
      
@@ -505,7 +511,9 @@ public class NuevaCompra extends javax.swing.JInternalFrame {
     private void jbLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaActionPerformed
         limpiarCampos();
         limpiarTabla();
-       
+        vaciarTabla();
+        jtfPrecioCosto.setText("");
+        jtfPrecioTotal.setText("");
     }//GEN-LAST:event_jbLimpiarTablaActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed

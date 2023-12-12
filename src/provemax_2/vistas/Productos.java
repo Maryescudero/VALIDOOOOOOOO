@@ -46,6 +46,7 @@ public class Productos extends javax.swing.JInternalFrame {
         // Limpiar todas las filas de la tabla
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
+            
         }
     }
      
@@ -438,7 +439,6 @@ public class Productos extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar o modificar el proveedor");
         }
-
 
     limpiarCampos();
 
